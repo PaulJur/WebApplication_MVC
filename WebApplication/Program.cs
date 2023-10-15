@@ -1,7 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using WebApplication.Data;
+
+var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationDbContext>(options=>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); //Application DB context will use SQL server. With connection string of the key name value being DefaultConnection
 
 var app = builder.Build();
 
