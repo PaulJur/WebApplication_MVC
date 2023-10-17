@@ -13,7 +13,7 @@ namespace WebApplication.Controllers
         }
         public IActionResult Index()//when newly created, the index does not exist in the Views folder
         {
-            List<Category> objCategoryList = _db.Categories.ToList();//convert it to a list and assign it. It runs all the SQL code in the database
+            List<Category> objCategoryList = _db.Categories.ToList();//convert it to a list and assign it. It runs all the SQL code in the database and returns the data in the Index view
                                                                      //to retrieve SELECT * FROM Categories and assigns it to the object etc.
             return View(objCategoryList);
         }
@@ -42,6 +42,7 @@ namespace WebApplication.Controllers
             {
                 _db.Categories.Add(obj);//This will add the category object(made by the user input) to the category table. This keeps track of the changes
                 _db.SaveChanges();//this makes the changes in the database table
+                TempData["success"] = "Category created succesfully"; //"success" is the key name
                 return RedirectToAction("Index");//This will refresh the database table and show the new stuff
             }
             return View(obj);//stays on the create category page
@@ -74,6 +75,7 @@ namespace WebApplication.Controllers
             {
                 _db.Categories.Update(obj);//This will Update the category object(made by the user input) to the category table. This keeps track of the changes
                 _db.SaveChanges();//this makes the changes in the database table
+                TempData["success"] = "Category updated succesfully";
                 return RedirectToAction("Index");//This will refresh the database table and show the new stuff
             }
             return View(obj);//stays on the create category page
@@ -106,6 +108,7 @@ namespace WebApplication.Controllers
             }
             _db.Categories.Remove(obj);//Removes object based on the ID found 
             _db.SaveChanges();//this makes the changes in the database table
+            TempData["success"] = "Category deleted succesfully";
             return RedirectToAction("Index");//This will refresh the database table and show the new stuff
         }
     }

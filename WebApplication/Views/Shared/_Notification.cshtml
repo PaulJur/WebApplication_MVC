@@ -1,0 +1,9 @@
+﻿@if (TempData["success"] != null) @* if the tempdata is a success after all changes in CategoryController, execute below *@
+{
+    <h2>@TempData["success"]</h2> @* Displays a notif/text that the operation wasa success based on the executed action that will remove itself after a refresh(1 request) *@
+}
+@if (TempData["error"] != null) 
+{
+    <h2>@TempData["error"]</h2>
+}
+
